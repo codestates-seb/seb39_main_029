@@ -9,7 +9,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "dev-be" ]
+    branches: [ "doyoon" ]
 
 permissions:
   contents: read
