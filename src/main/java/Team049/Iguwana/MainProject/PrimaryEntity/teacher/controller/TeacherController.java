@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/v1/teacher")
@@ -17,6 +18,9 @@ public class TeacherController {
 
     @GetMapping
     public ResponseEntity createTeacher() {
-        return new ResponseEntity( "Hello", HttpStatus.CREATED);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "hellop");
+        return new ResponseEntity( map, HttpStatus.CREATED);
     }
 }
