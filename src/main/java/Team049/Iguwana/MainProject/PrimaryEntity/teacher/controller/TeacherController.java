@@ -20,7 +20,7 @@ public class TeacherController {
     public ResponseEntity createTeacher() {
 
         HashMap<String, String> map = new HashMap<>();
-        map.put("result", "hellop");
+        map.put("result", "hello");
         return new ResponseEntity( map, HttpStatus.CREATED);
     }
 }
