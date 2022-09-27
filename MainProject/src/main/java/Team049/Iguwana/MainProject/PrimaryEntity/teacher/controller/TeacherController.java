@@ -1,8 +1,9 @@
 package Team049.Iguwana.MainProject.PrimaryEntity.teacher.controller;
 
 //import Team049.Iguwana.MainProject.PrimaryEntity.email.service.EmailService;
-import Team049.Iguwana.MainProject.PrimaryEntity.review.dto.ReviewDto;
+import Team049.Iguwana.MainProject.PrimaryEntity.email.entity.Email;
 import Team049.Iguwana.MainProject.PrimaryEntity.review.service.ReviewService;
+import Team049.Iguwana.MainProject.PrimaryEntity.schedle.ScheduleService;
 import Team049.Iguwana.MainProject.PrimaryEntity.teacher.dto.TeacherDto;
 import Team049.Iguwana.MainProject.PrimaryEntity.teacher.entity.Teacher;
 import Team049.Iguwana.MainProject.PrimaryEntity.teacher.mapper.TeacherMapper;
@@ -19,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -33,18 +33,21 @@ public class TeacherController {
     private final SkillTableRepository skillTableRepository;
 
     private final ReviewService reviewService;
+    private final ScheduleService scheduleService;
 
-    public TeacherController(TeacherMapper teacherMapper, TeacherService teacherService, SkillTableRepository skillTableRepository, ReviewService reviewService) {
+    public TeacherController(TeacherMapper teacherMapper, TeacherService teacherService, SkillTableRepository skillTableRepository, ReviewService reviewService, ScheduleService scheduleService) {
         this.teacherMapper = teacherMapper;
         this.teacherService = teacherService;
         this.skillTableRepository = skillTableRepository;
         this.reviewService = reviewService;
+        this.scheduleService = scheduleService;
     }
 
     @PostMapping("/join")
     @ResponseStatus(HttpStatus.OK)
-    public String joinTeacher(@Validated @RequestBody TeacherDto.Join join, HttpServletResponse response) throws IOException {
-        teacherService.createTeacher(teacherMapper.teacherJoinToTeacher(join));
+    public String joinTeacher(@Validated @RequestBody TeacherDto.Join join, HttpServletResponse response) throws IOException, InterruptedException {
+        Email email = teacherService.createTeacher(teacherMapper.teacherJoinToTeacher(join));
+        scheduleService.deleteEmail(email.getCode());
         return "메시지 전송 완료";
     }
 
@@ -78,6 +81,7 @@ public class TeacherController {
                                    @RequestParam String arrange,
                                    @RequestParam String skill
     ) {
+        System.out.println("확인");
         Page<Teacher> pages = teacherService.findTeachers(page - 1, size,arrange);
         List<Teacher> teachers = pages.getContent();
         if (!skill.equals("x")) {

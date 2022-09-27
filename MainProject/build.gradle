@@ -24,7 +24,7 @@ dependencies {
 	implementation group: 'io.awspring.cloud', name: 'spring-cloud-starter-aws-parameter-store-config'
 
 	// aws mysql 사용시에 적용
-//	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'mysql:mysql-connector-java'
 	// 인메모리 h2 사용시에 적용
 	runtimeOnly 'com.h2database:h2'
 
@@ -57,7 +57,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	//aws 클라우드 관련 작업할 때 필요
-	//implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
 
   //파라미터 스토어 관련 정보 추가

@@ -18,7 +18,8 @@ public enum ExceptionCode {
     EMAIL_EXISTS(409, "Email is exists"),
     STUDENT_NOT_FOUND(404, "Student not found"),
     TEACHER_NOT_FOUND(404, "Teacher not found"),
-    TUTORING_NOT_FOUND(404, "Tutoring not found");
+    TUTORING_NOT_FOUND(404, "Tutoring not found"),
+    EMAIL_NOT_FOUND(404, "Email not found");
 
 
 

@@ -1,4 +1,3 @@
-/*
 package Team049.Iguwana.MainProject.PrimaryEntity.email.repository;
 
 
@@ -14,6 +13,6 @@ public interface EmailRepository extends JpaRepository<Email,Long> {
     @Query(value = "select * from email where code = :code", nativeQuery = true)
     Optional<Email> findByCodes(String code);
 
-
+    @Query(value="select * from email order by email_id desc limit 1",nativeQuery = true)
+    Optional<Email> findByRecentEmail();
 }
-*/

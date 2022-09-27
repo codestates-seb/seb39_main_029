@@ -1,13 +1,16 @@
-/*
 package Team049.Iguwana.MainProject.PrimaryEntity.schedle;
 
 
+import Team049.Iguwana.MainProject.PrimaryEntity.email.entity.Email;
 import Team049.Iguwana.MainProject.PrimaryEntity.email.repository.EmailRepository;
+import Team049.Iguwana.MainProject.exception.BusinessLogicException;
+import Team049.Iguwana.MainProject.exception.ExceptionCode;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 @Component
 public class ScheduleService {
@@ -28,7 +31,6 @@ public class ScheduleService {
     }
 
     // [2초 후 3초마다 반복 실행 스케줄링]
-*/
 /*@Scheduled(fixedDelay = 3000,  initialDelay = 2000)
     public void threeRepeatJob(){
         System.out.println("\n");
@@ -37,7 +39,7 @@ public class ScheduleService {
         System.out.println("[JopTime] : " + getNowDateTime24());
         System.out.println("=======================================");
         System.out.println("\n");
-    }*//*
+    }*/
 
 
 
@@ -45,10 +47,27 @@ public class ScheduleService {
 
     // [매일 오전 8시 58분에 실행되는 스케줄링]
     // [* 초(0-59)     * 분(0-59)　 　* 시간(0-23)　 　* 일(1-31)　　*　월(1-12)　　* 요일(0-7)]
-    @Scheduled(cron = "0 58 4 * * *")
+/*    @Scheduled(cron = "0 58 4 * * *")
     public void everyDay_M_8_58_RepeatJob(){
         emailRepository.deleteAll();
+    }*/
+
+
+    public void deleteEmail(String code) throws InterruptedException {
+        Thread.sleep(500000L);
+        Optional<Email> email=emailRepository.findByRecentEmail();
+        if (email.isPresent()) {
+            Email findEmail = email.get();
+            if (findEmail.getCode().equals(code)) {
+
+                emailRepository.delete(findEmail);
+                return;
+            }
+        }
+
+        throw new BusinessLogicException(ExceptionCode.EMAIL_NOT_FOUND);
+
     }
 
+
 }
-*/

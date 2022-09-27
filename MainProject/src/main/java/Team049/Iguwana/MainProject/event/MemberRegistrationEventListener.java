@@ -1,7 +1,7 @@
-/*
 package Team049.Iguwana.MainProject.event;
 
 import Team049.Iguwana.MainProject.PrimaryEntity.email.EmailSender;
+import Team049.Iguwana.MainProject.PrimaryEntity.schedle.ScheduleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,10 @@ public class MemberRegistrationEventListener {
     private final EmailSender emailSender;
 
 
+
     public MemberRegistrationEventListener(EmailSender emailSender) {
         this.emailSender = emailSender;
+
     }
 
     @Async
@@ -43,4 +45,3 @@ public class MemberRegistrationEventListener {
         }
     }
 }
-*/
